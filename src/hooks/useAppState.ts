@@ -52,7 +52,10 @@ export function useProgress() {
     (id: string) => setProgress((p) => (p.exercises.includes(id) ? p : { ...p, exercises: [...p.exercises, id] })),
     [],
   );
-  const reset = useCallback(() => setProgress(emptyProgress), []);
+  const reset = useCallback(() => {
+    setProgress(emptyProgress);
+    window.dispatchEvent(new Event('git-mastery:reset'));
+  }, []);
 
   return { progress, toggleComplete, markVisited, recordQuiz, recordMission, completeExercise, reset };
 }
