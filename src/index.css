@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Layout: app shell — sticky header, left rail of modules on desktop, bottom tab bar on phones.
+   Palette: blue-slate neutrals, Git's own orange-red for primary actions,
+   four branch-lane colors that also drive every commit graph. Dark first. */
+:root {
+  --bg: 12 15 20;
+  --panel: 18 22 29;
+  --raised: 26 31 40;
+  --line: 40 47 60;
+  --fg: 228 233 240;
+  --muted: 150 160 176;
+  --faint: 104 114 130;
+  --accent: 240 80 51;
+  --accent-fg: 255 255 255;
+  --ok: 63 190 124;
+  --bad: 240 96 96;
+  --warn: 232 172 64;
+  --info: 96 165 245;
+  --b1: 96 165 245;
+  --b2: 63 190 124;
+  --b3: 190 136 250;
+  --b4: 232 172 64;
+  --term: 8 10 14;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    --bg: 245 246 249;
+    --panel: 255 255 255;
+    --raised: 238 241 246;
+    --line: 218 223 231;
+    --fg: 22 27 35;
+    --muted: 82 92 108;
+    --faint: 128 138 154;
+    --accent: 212 60 30;
+    --accent-fg: 255 255 255;
+    --ok: 22 135 76;
+    --bad: 200 45 45;
+    --warn: 168 108 0;
+    --info: 28 104 204;
+    --b1: 28 104 204;
+    --b2: 22 135 76;
+    --b3: 128 72 204;
+    --b4: 168 108 0;
+    --term: 250 251 253;
+    color-scheme: light;
+  }
+}
+:root[data-theme='light'] {
+  --bg: 245 246 249;
+  --panel: 255 255 255;
+  --raised: 238 241 246;
+  --line: 218 223 231;
+  --fg: 22 27 35;
+  --muted: 82 92 108;
+  --faint: 128 138 154;
+  --accent: 212 60 30;
+  --accent-fg: 255 255 255;
+  --ok: 22 135 76;
+  --bad: 200 45 45;
+  --warn: 168 108 0;
+  --info: 28 104 204;
+  --b1: 28 104 204;
+  --b2: 22 135 76;
+  --b3: 128 72 204;
+  --b4: 168 108 0;
+  --term: 250 251 253;
+  color-scheme: light;
+}
+
+html,
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
+}
+body {
+  font-family: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 60;
+  background: rgb(var(--bg));
+}
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+.gutter {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+.eyebrow {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+.prose-git p + p {
+  margin-top: 0.75rem;
+}
+.prose-git code {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.86em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: rgb(var(--raised));
+  border: 1px solid rgb(var(--line));
+  white-space: nowrap;
+}
+:focus-visible {
+  outline: 2px solid rgb(var(--info));
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+.graph-node {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s;
+}
+.graph-edge {
+  transition: d 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s;
+}
+.scroll-thin::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: rgb(var(--line));
+  border-radius: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
